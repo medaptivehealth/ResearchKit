@@ -554,6 +554,9 @@
 		D442397E1AF17F7600559D96 /* ORKImageCaptureStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D442397C1AF17F7600559D96 /* ORKImageCaptureStepViewController.m */; };
 		D458520A1AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = D45852081AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h */; };
 		D458520B1AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = D45852091AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m */; };
+		DF902F091F713027007537B4 /* MHStagedActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F061F713027007537B4 /* MHStagedActivity.swift */; };
+		DF902F0A1F713027007537B4 /* MHStagedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F071F713027007537B4 /* MHStagedEvent.swift */; };
+		DF902F0B1F713027007537B4 /* MHStagedSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F081F713027007537B4 /* MHStagedSchedule.swift */; };
 		FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */; };
 		FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */; };
 		FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */; };
@@ -1179,6 +1182,9 @@
 		D442397C1AF17F7600559D96 /* ORKImageCaptureStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureStepViewController.m; sourceTree = "<group>"; };
 		D45852081AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureCameraPreviewView.h; sourceTree = "<group>"; };
 		D45852091AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureCameraPreviewView.m; sourceTree = "<group>"; };
+		DF902F061F713027007537B4 /* MHStagedActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedActivity.swift; sourceTree = "<group>"; };
+		DF902F071F713027007537B4 /* MHStagedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedEvent.swift; sourceTree = "<group>"; };
+		DF902F081F713027007537B4 /* MHStagedSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedSchedule.swift; sourceTree = "<group>"; };
 		FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentDocumentTests.m; sourceTree = "<group>"; };
 		FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSectionFormatter.h; sourceTree = "<group>"; };
 		FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatter.m; sourceTree = "<group>"; };
@@ -1573,6 +1579,7 @@
 		86B623AF19520B770074CD3C /* ResearchKit */ = {
 			isa = PBXGroup;
 			children = (
+				DF902F051F713027007537B4 /* MHStagedActivity */,
 				B1C1DE4F196F541F00F75544 /* ResearchKit.h */,
 				B1B894391A00345200C5CF2D /* ResearchKit_Private.h */,
 				86C40B511A8D7C5B00081FAC /* Common */,
@@ -2483,6 +2490,16 @@
 			name = "Image Capture Step";
 			sourceTree = "<group>";
 		};
+		DF902F051F713027007537B4 /* MHStagedActivity */ = {
+			isa = PBXGroup;
+			children = (
+				DF902F061F713027007537B4 /* MHStagedActivity.swift */,
+				DF902F071F713027007537B4 /* MHStagedEvent.swift */,
+				DF902F081F713027007537B4 /* MHStagedSchedule.swift */,
+			);
+			path = MHStagedActivity;
+			sourceTree = "<group>";
+		};
 		FA7A9D2C1B083D90005A2BEA /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
@@ -3122,6 +3139,7 @@
 				10FF9AD01B79F5CE00ECB5B4 /* ORKHolePegTestRemoveContentView.m in Sources */,
 				10FF9AD41B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.m in Sources */,
 				618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */,
+				DF902F0A1F713027007537B4 /* MHStagedEvent.swift in Sources */,
 				866DA5211D63D04700C9AF3F /* ORKCollector.m in Sources */,
 				BC4A21401C85FC0000BFC271 /* ORKBarGraphChartView.m in Sources */,
 				86C40D3A1A8D7C5C00081FAC /* ORKHTMLPDFWriter.m in Sources */,
@@ -3137,6 +3155,7 @@
 				86C40D9E1A8D7C5C00081FAC /* ORKSubheadlineLabel.m in Sources */,
 				10864CA31B27146B000F4158 /* ORKPSATContentView.m in Sources */,
 				6146D0A41B84A91E0068491D /* ORKLineGraphAccessibilityElement.m in Sources */,
+				DF902F091F713027007537B4 /* MHStagedActivity.swift in Sources */,
 				D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */,
 				86C40C401A8D7C5C00081FAC /* ORKSpatialSpanMemoryContentView.m in Sources */,
 				BCB6E6671B7D535F000D5B34 /* ORKXAxisView.m in Sources */,
@@ -3277,6 +3296,7 @@
 				86C40DD41A8D7C5C00081FAC /* ORKTextButton.m in Sources */,
 				86C40C981A8D7C5C00081FAC /* ORKDataLogger.m in Sources */,
 				86C40D0C1A8D7C5C00081FAC /* ORKCustomStepView.m in Sources */,
+				DF902F0B1F713027007537B4 /* MHStagedSchedule.swift in Sources */,
 				FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */,
