@@ -8,18 +8,22 @@
 
 import Foundation
 
-struct MHStagedSchedule {
+public struct MHStagedSchedule {
 
-    var startDate: Date?
-    var endDate: Date?
-    var duration: [Int]?
-    var durationType: Int?
-    var repeats: MHRepetitionPattern?
+    public var startDate: Date?
+    public var endDate: Date?
+    public var duration: Int?
+    public var durationUnit: MHDurationUnit?
+    public var repeats: MHRepetitionPattern?
 
 }
 
-enum MHRepetitionPattern {
-    case Daily, Weekly, MonthlyDate, MonthlyDay
+public enum MHDurationUnit {
+    case days, weeks, months
+}
+
+public enum MHRepetitionPattern {
+    case daily, weekly, monthlyDate, monthlyDay
 }
 
 /*

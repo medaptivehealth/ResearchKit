@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct MHStagedActivity {
+public struct MHStagedActivity {
 
-    var id: String?
-    var type: MHStagedActivityType?
-    var schedule: MHStagedSchedule?
-    var activityInfo: [String: Any]?
+    public var id: String?
+    public var type: MHStagedActivityType?
+    public var schedule: MHStagedSchedule?
+    public var activityInfo: [String: Any]?
 
 }
 
-enum MHStagedActivityType {
+public enum MHStagedActivityType {
     case survey, activeTask, insight
 }

@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct MHStagedEvent {
+public struct MHStagedEvent {
 
-    var activity: String?
-    var eventStartDate: Date?
-    var eventEndDate: Date?
-    var status: MHStagedEventStatus?
-    var result: MHStagedEventResult?
+    public var activity: String?
+    public var eventStartDate: Date?
+    public var eventEndDate: Date?
+    public var status: MHStagedEventStatus?
+    public var result: MHStagedEventResult?
 
 }
 
@@ -31,10 +31,10 @@ struct MHStagedEvent {
  */
 
 
-enum MHStagedEventStatus {
+public enum MHStagedEventStatus {
     case new, inProgress, done
 }
 
-enum MHStagedEventResult {
+public enum MHStagedEventResult {
     case inProgress, done
 }
