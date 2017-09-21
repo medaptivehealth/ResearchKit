@@ -12,7 +12,7 @@ public struct MHStagedSchedule {
 
     public var startDate: Date?
     public var endDate: Date?
-    public var duration: Int?
+    public var duration: Int16?
     public var durationUnit: MHDurationUnit?
     public var repeats: MHRepetitionPattern?
 
@@ -22,7 +22,7 @@ public enum MHDurationUnit {
     case days, weeks, months
 }
 
-public enum MHRepetitionPattern {
+public enum MHRepetitionPattern: String, RawRepresentable {
     case daily, weekly, monthlyDate, monthlyDay
 }
 
