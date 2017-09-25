@@ -13,13 +13,26 @@ public struct MHStagedSchedule {
     public var startDate: Date?
     public var endDate: Date?
     public var duration: Int16?
+    public var unitsToSkip: Int16?
     public var durationUnit: MHDurationUnit?
     public var repeats: MHRepetitionPattern?
+    public var pattern: AnyObject?
 
 }
 
 public enum MHDurationUnit {
     case days, weeks, months
+
+    public var component: Calendar.Component {
+        switch self {
+        case .days:
+            return .day
+        case .weeks:
+            return .weekOfYear
+        case .months:
+            return .month
+        }
+    }
 }
 
 public enum MHRepetitionPattern: String, RawRepresentable {

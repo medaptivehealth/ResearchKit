@@ -11,15 +11,15 @@ import Foundation
 public struct MHStagedEvent {
 
     public var activity: String?
-    public var eventStartDate: Date?
-    public var eventEndDate: Date?
+    public var startDate: Date?
+    public var endDate: Date?
     public var status: MHStagedEventStatus?
     public var result: MHStagedEventResult?
 
     
-    init(startDate: Date?, endDate: Date?, activity: MHStagedActivity) {
-        self.eventStartDate = startDate
-        self.eventEndDate = endDate
+    public init(startDate: Date?, endDate: Date?, activity: MHStagedActivity) {
+        self.startDate = startDate
+        self.endDate = endDate
         self.activity = activity.id
     }
 
