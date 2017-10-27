@@ -10,13 +10,20 @@ import Foundation
 
 public struct MHStagedSchedule {
 
-    public var startDate: Date?
-    public var endDate: Date?
+    public var start: DateTemp?
+    public var end: DateTemp?
     public var duration: Int16?
     public var unitsToSkip: Int16?
     public var durationUnit: MHDurationUnit?
     public var repeats: MHRepetitionPattern?
     public var pattern: AnyObject?
+
+}
+
+public struct DateTemp {
+
+    public var value: Int?
+    public var units: MHDurationUnit?
 
 }
 

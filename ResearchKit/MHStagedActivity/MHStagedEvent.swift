@@ -15,14 +15,12 @@ public struct MHStagedEvent {
     public var endDate: Date?
     public var status: MHStagedEventStatus?
     public var result: MHStagedEventResult?
-
     
     public init(startDate: Date?, endDate: Date?, activity: MHStagedActivity) {
         self.startDate = startDate
         self.endDate = endDate
         self.activity = activity.id
     }
-
 }
 
 /*
