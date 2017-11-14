@@ -13,10 +13,12 @@ public struct MHStagedEvent {
     public var activity: String?
     public var startDate: Date?
     public var endDate: Date?
+    public var progress: Data?
     public var status: MHStagedEventStatus?
     public var result: MHStagedEventResult?
     
     public init(startDate: Date?, endDate: Date?, activity: MHStagedActivity) {
+        self.progress = Data()
         self.startDate = startDate
         self.endDate = endDate
         self.activity = activity.id
