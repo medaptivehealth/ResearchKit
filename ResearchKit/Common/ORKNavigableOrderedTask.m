@@ -185,7 +185,8 @@
             *stop = YES;
         }
     }];
-    if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0) {
+
+    if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0 && ![step.identifier isEqualToString:@"1"]) {
         previousStep = [self stepWithIdentifier:result.results[indexOfCurrentStepResult - 1].identifier];
     }
     return previousStep;

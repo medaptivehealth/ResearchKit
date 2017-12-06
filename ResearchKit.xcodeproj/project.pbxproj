@@ -554,9 +554,6 @@
 		D442397E1AF17F7600559D96 /* ORKImageCaptureStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D442397C1AF17F7600559D96 /* ORKImageCaptureStepViewController.m */; };
 		D458520A1AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = D45852081AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h */; };
 		D458520B1AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = D45852091AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m */; };
-		DF14D7E31FD8B92A002B31BC /* ORKTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF14D7E01FD8B929002B31BC /* ORKTaskViewController.m */; };
-		DF14D7E41FD8B92A002B31BC /* ORKTaskViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DF14D7E11FD8B92A002B31BC /* ORKTaskViewController.h */; };
-		DF14D7E51FD8B92A002B31BC /* ORKNavigableOrderedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = DF14D7E21FD8B92A002B31BC /* ORKNavigableOrderedTask.m */; };
 		DF902F091F713027007537B4 /* MHStagedActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F061F713027007537B4 /* MHStagedActivity.swift */; };
 		DF902F0A1F713027007537B4 /* MHStagedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F071F713027007537B4 /* MHStagedEvent.swift */; };
 		DF902F0B1F713027007537B4 /* MHStagedSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF902F081F713027007537B4 /* MHStagedSchedule.swift */; };
@@ -1185,9 +1182,6 @@
 		D442397C1AF17F7600559D96 /* ORKImageCaptureStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureStepViewController.m; sourceTree = "<group>"; };
 		D45852081AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureCameraPreviewView.h; sourceTree = "<group>"; };
 		D45852091AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureCameraPreviewView.m; sourceTree = "<group>"; };
-		DF14D7E01FD8B929002B31BC /* ORKTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKTaskViewController.m; path = ../../../../../../Downloads/ORKTaskViewController.m; sourceTree = "<group>"; };
-		DF14D7E11FD8B92A002B31BC /* ORKTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKTaskViewController.h; path = ../../../../../../Downloads/ORKTaskViewController.h; sourceTree = "<group>"; };
-		DF14D7E21FD8B92A002B31BC /* ORKNavigableOrderedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKNavigableOrderedTask.m; path = ../../../../../../Downloads/ORKNavigableOrderedTask.m; sourceTree = "<group>"; };
 		DF902F061F713027007537B4 /* MHStagedActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedActivity.swift; sourceTree = "<group>"; };
 		DF902F071F713027007537B4 /* MHStagedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedEvent.swift; sourceTree = "<group>"; };
 		DF902F081F713027007537B4 /* MHStagedSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MHStagedSchedule.swift; sourceTree = "<group>"; };
@@ -1628,9 +1622,6 @@
 		86C40B511A8D7C5B00081FAC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DF14D7E21FD8B92A002B31BC /* ORKNavigableOrderedTask.m */,
-				DF14D7E11FD8B92A002B31BC /* ORKTaskViewController.h */,
-				DF14D7E01FD8B929002B31BC /* ORKTaskViewController.m */,
 				B12EFF3B1AB211E000A80147 /* Answer Format */,
 				B12EFF3A1AB211CC00A80147 /* Container Views */,
 				B12EFF3D1AB2121000A80147 /* Definitions */,
@@ -2852,7 +2843,6 @@
 				861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */,
 				86C40C461A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.h in Headers */,
 				86C40C521A8D7C5C00081FAC /* ORKTappingIntervalStep.h in Headers */,
-				DF14D7E41FD8B92A002B31BC /* ORKTaskViewController.h in Headers */,
 				86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */,
 				86C40DFE1A8D7C5C00081FAC /* ORKConsentDocument.h in Headers */,
 				D442397D1AF17F7600559D96 /* ORKImageCaptureStepViewController.h in Headers */,
@@ -3117,7 +3107,6 @@
 				86C40C481A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.m in Sources */,
 				86C40CDA1A8D7C5C00081FAC /* ORKTextFieldView.m in Sources */,
 				B8760F2C1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.m in Sources */,
-				DF14D7E31FD8B92A002B31BC /* ORKTaskViewController.m in Sources */,
 				86C40D821A8D7C5C00081FAC /* ORKSelectionSubTitleLabel.m in Sources */,
 				86C40DCC1A8D7C5C00081FAC /* ORKTaskViewController.m in Sources */,
 				86C40E061A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.m in Sources */,
@@ -3211,7 +3200,6 @@
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,
 				D442397A1AF17F5100559D96 /* ORKImageCaptureStep.m in Sources */,
 				FF36A48E1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m in Sources */,
-				DF14D7E51FD8B92A002B31BC /* ORKNavigableOrderedTask.m in Sources */,
 				86C40CDE1A8D7C5C00081FAC /* ORKTintedImageView.m in Sources */,
 				86B781BC1AA668ED00688151 /* ORKTimeIntervalPicker.m in Sources */,
 				86B781BE1AA668ED00688151 /* ORKValuePicker.m in Sources */,

@@ -183,6 +183,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     
     NSString *_restoredTaskIdentifier;
     NSString *_restoredStepIdentifier;
+    BOOL _isCompleted;
 }
 
 @property (nonatomic, strong) UIImageView *hairline;
@@ -313,6 +314,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             [self applicationFinishedRestoringState];
         }
     }
+    return self;
+}
+
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted {
+    _isCompleted = isCompleted;
+    
+    self = [self initWithTask:task restorationData:data delegate:delegate];
+    
     return self;
 }
 
@@ -643,7 +652,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!_hasBeenPresented) {
         // Add first step viewController
         ORKStep *step = [self nextStep];
-        if ([self shouldPresentStep:step]) {
+        if ([self shouldPresentStep:step] && !_isCompleted) {
             
             if (![step isKindOfClass:[ORKInstructionStep class]]) {
                 [self startAudioPromptSessionIfNeeded];
@@ -653,10 +662,19 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             ORKStepViewController *firstViewController = [self viewControllerForStep:step];
             [self showViewController:firstViewController goForward:YES animated:animated];
             
+        } else {
+            ORKStep *step = [[self task] stepWithIdentifier:@"1"];
+            ORKStepViewController *stepVC = [self viewControllerForStep:step];
+            [self showViewController:stepVC goForward:true animated:false];
         }
         _hasBeenPresented = YES;
     }
-    
+    if (_isCompleted) {
+        ORKStep *step = [[self task] stepWithIdentifier:@"1"];
+        ORKStepViewController *stepVC = [self viewControllerForStep:step];
+        stepVC.navigationItem.leftBarButtonItem = NULL;
+        [self showViewController:stepVC goForward:false animated:false];
+    }
     // Record TaskVC's start time.
     // TaskVC is one time use only, no need to update _startDate later.
     if (!_presentedDate) {

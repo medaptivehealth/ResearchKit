@@ -337,6 +337,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate;
 
+- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted;
 /**
  The delegate for the task view controller.
  
