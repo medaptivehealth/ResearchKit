@@ -318,11 +318,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted {
+    
     _isCompleted = isCompleted;
     
-    self = [self initWithTask:task restorationData:data delegate:delegate];
-    
-    return self;
+    return [self initWithTask:task restorationData:data delegate:delegate];
 }
 
 - (void)setTaskRunUUID:(NSUUID *)taskRunUUID {
