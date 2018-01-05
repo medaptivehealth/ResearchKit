@@ -671,8 +671,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_isCompleted) {
         ORKStep *step = [[self task] stepWithIdentifier:@"1"];
         ORKStepViewController *stepVC = [self viewControllerForStep:step];
-        stepVC.navigationItem.leftBarButtonItem = NULL;
-        [self showViewController:stepVC goForward:false animated:false];
+        //stepVC.navigationItem.leftBarButtonItem = NULL;
+        [_managedStepIdentifiers removeAllObjects];
+        [self showViewController:stepVC goForward:NO animated:NO];
     }
     // Record TaskVC's start time.
     // TaskVC is one time use only, no need to update _startDate later.
@@ -1468,8 +1469,8 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     if (_task) {
         
         // Recover partially entered results, even if we may not be able to jump to the desired step.
-        _managedResults = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKManagedResultsRestoreKey];
-        _managedStepIdentifiers = [coder decodeObjectOfClass:[NSMutableArray class] forKey:_ORKManagedStepIdentifiersRestoreKey];
+        _managedResults = [[coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKManagedResultsRestoreKey] mutableCopy];
+        _managedStepIdentifiers = [[coder decodeObjectOfClass:[NSMutableArray class] forKey:_ORKManagedStepIdentifiersRestoreKey] mutableCopy];
         
         _restoredTaskIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKTaskIdentifierRestoreKey];
         if (_restoredTaskIdentifier) {
