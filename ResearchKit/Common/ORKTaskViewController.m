@@ -180,6 +180,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     NSString *_lastRestorableStepIdentifier;
     
     BOOL _hasAudioSession; // does not need state restoration - temporary
+    BOOL _shouldGoForward;
     
     NSString *_restoredTaskIdentifier;
     NSString *_restoredStepIdentifier;
@@ -652,15 +653,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         // Add first step viewController
         ORKStep *step = [self nextStep];
         if ([self shouldPresentStep:step] && !_isCompleted) {
-            
             if (![step isKindOfClass:[ORKInstructionStep class]]) {
                 [self startAudioPromptSessionIfNeeded];
                 [self requestHealthAuthorizationWithCompletion:nil];
             }
             
+            _shouldGoForward = true;
             ORKStepViewController *firstViewController = [self viewControllerForStep:step];
             [self showViewController:firstViewController goForward:YES animated:animated];
-            
+           
+            if (firstViewController.result.results.count > 0) {
+                [self goForward];
+            }
         } else {
             ORKStep *step = [[self task] stepWithIdentifier:@"1"];
             ORKStepViewController *stepVC = [self viewControllerForStep:step];
@@ -1322,7 +1326,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)stepViewController:(ORKStepViewController *)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction {
-    
+    NSLog(@"didFinish");
     if (!stepViewController.readOnlyMode) {
         // Add step result object
         [self setManagedResult:[stepViewController result] forKey:stepViewController.step.identifier];
@@ -1338,6 +1342,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [self flipToNextPageFrom:stepViewController];
     } else {
         [self flipToPreviousPageFrom:stepViewController];
+    }
+    NSLog(@"Results: %lu", [[[stepViewController result] results] count]);
+    if ([[[stepViewController result] results] count] > 0 && _shouldGoForward) {
+        ORKQuestionResult *res = (ORKQuestionResult *)[[[stepViewController result] results] firstObject];
+        if (_lastStepIdAnswered != NULL && ![[res identifier] isEqualToString:_lastStepIdAnswered]) {
+            [self goForward];
+        } else {
+            _shouldGoForward = false;
+        }
+        
+    } else {
+        _shouldGoForward = false;
     }
 }
 

@@ -450,6 +450,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, readonly, nullable) ORKStepViewController *currentStepViewController;
 
 /**
+ The last step id answered.
+ 
+*/
+
+@property (nonatomic, strong, nullable) NSString *lastStepIdAnswered;
+
+/**
  Forces navigation to the next step.
  
  Call this method to force forward navigation. This method is called by the framework
