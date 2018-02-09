@@ -191,6 +191,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  */
 - (nullable ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step;
 
+- (nullable ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step isReadOnly:(BOOL)isReadOnly;
+
 /**
  Asks the delegate if the task view controller should proceed to the specified step.
  
@@ -338,6 +340,8 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate;
 
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted;
+
+- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted isReadOnly:(BOOL)isReadOnly;
 /**
  The delegate for the task view controller.
  

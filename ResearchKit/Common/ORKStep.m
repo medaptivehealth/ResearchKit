@@ -79,6 +79,19 @@
     return stepViewController;
 }
 
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result andIsReadOnly:(BOOL) isReadOnly {
+    Class stepViewControllerClass = [self stepViewControllerClass];
+    
+    ORKStepViewController *stepViewController = [[stepViewControllerClass alloc] initWithStep:self result:result isReadOnly:isReadOnly];
+    
+    // Set the restoration info using the given class
+    stepViewController.restorationIdentifier = self.identifier;
+    stepViewController.restorationClass = stepViewControllerClass;
+    
+    return stepViewController;
+
+}
+
 - (instancetype)copyWithIdentifier:(NSString *)identifier {
     ORKThrowInvalidArgumentExceptionIfNil(identifier)
     ORKStep *step = [self copy];

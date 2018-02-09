@@ -202,6 +202,9 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result;
 
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result isReadOnly:(BOOL) isReadOnly;
+
+
 /**
  The step presented by the step view controller.
  
