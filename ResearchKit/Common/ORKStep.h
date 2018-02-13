@@ -217,6 +217,8 @@ ORK_CLASS_AVAILABLE
  @return A newly initialized step view controller.
  */
 - (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result;
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result andIsReadOnly:(BOOL) isReadOnly;
+
 
 @end
 

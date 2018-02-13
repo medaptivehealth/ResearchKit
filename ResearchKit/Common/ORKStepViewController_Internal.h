@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
 
+@property (nonatomic) BOOL isReadOnly;
+
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction;
 
 - (void)notifyDelegateOnResultChange;
