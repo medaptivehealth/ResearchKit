@@ -652,7 +652,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!_hasBeenPresented) {
         // Add first step viewController
         ORKStep *step = [self nextStep];
-        if ([self shouldPresentStep:step] && !_isCompleted) {
+        if ([self shouldPresentStep:step] && !_isCompleted && _lastStepIdAnswered != nil) {
             if (![step isKindOfClass:[ORKInstructionStep class]]) {
                 [self startAudioPromptSessionIfNeeded];
                 [self requestHealthAuthorizationWithCompletion:nil];
