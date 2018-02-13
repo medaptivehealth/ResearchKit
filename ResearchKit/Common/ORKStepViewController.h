@@ -354,7 +354,6 @@ ORK_CLASS_AVAILABLE
  @return `YES` if there is a next step; otherwise, `NO`.
  */
 - (BOOL)hasNextStep;
-- (BOOL)readOnlyMode;
 
 /**
  The presenting task view controller. (read-only)
