@@ -185,6 +185,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     NSString *_restoredTaskIdentifier;
     NSString *_restoredStepIdentifier;
     BOOL _isCompleted;
+    BOOL _isReadOnly;
 }
 
 @property (nonatomic, strong) UIImageView *hairline;
@@ -320,6 +321,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted {
     
+    _isCompleted = isCompleted;
+    
+    return [self initWithTask:task restorationData:data delegate:delegate];
+}
+
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted isReadOnly:(BOOL)isReadOnly {
+    _isReadOnly = isReadOnly;
     _isCompleted = isCompleted;
     
     return [self initWithTask:task restorationData:data delegate:delegate];
@@ -1075,6 +1083,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     return [steps copy];
 }
+- (ORKStepViewController *)viewControllerForStep:(ORKStep *)step isReadOnly:(BOOL) isReadOnly {
+    _isReadOnly = _isReadOnly;
+    return [self viewControllerForStep:step];
+}
 
 - (ORKStepViewController *)viewControllerForStep:(ORKStep *)step {
     if (step == nil) {
@@ -1123,7 +1135,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             // Allow the step to instantiate the view controller. This will allow either the default
             // implementation using an override of the internal method `-stepViewControllerClass` or
             // allow for storyboard implementations.
-            stepViewController = [step instantiateStepViewControllerWithResult:result];
+            stepViewController = [step instantiateStepViewControllerWithResult:result andIsReadOnly:_isReadOnly];
         }
     }
     
@@ -1419,7 +1431,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (reviewStepViewController.reviewStep && reviewStepViewController.reviewStep.isStandalone) {
         _defaultResultSource = reviewStepViewController.reviewStep.resultSource;
     }
-    ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+    ORKStepViewController *stepViewController = [self viewControllerForStep:step isReadOnly:_isReadOnly];
     _defaultResultSource = resultSource;
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.continueButtonTitle = ORKLocalizedString(@"BUTTON_SAVE", nil);

@@ -134,6 +134,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return self;
 }
 
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result isReadOnly:(BOOL) isReadOnly {
+    self.isReadOnly = isReadOnly;
+    return [self initWithStep:step result:result];
+}
+
 - (void)stepDidChange {
     [super stepDidChange];
     _answerFormat = [self.questionStep impliedAnswerFormat];
@@ -191,7 +196,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
-                _customQuestionView.userInteractionEnabled = !self.readOnlyMode;
+                _customQuestionView.userInteractionEnabled = !self.isReadOnly;
             } else {
                 ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
                 cellHolderView.delegate = self;
@@ -199,7 +204,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 [NSLayoutConstraint activateConstraints:
                  [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
                 cellHolderView.answer = [self answer];
-                cellHolderView.userInteractionEnabled = !self.readOnlyMode;
+                cellHolderView.userInteractionEnabled = !self.isReadOnly;
                 _questionView.questionCustomView = cellHolderView;
             }
             
@@ -635,7 +640,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     }
     
-    cell.userInteractionEnabled = !self.readOnlyMode;
+    cell.userInteractionEnabled = !self.isReadOnly;
     return cell;
 }
 
