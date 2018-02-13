@@ -99,6 +99,12 @@
     return [self initWithStep:step];
 }
 
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result isReadOnly:(BOOL) isReadOnly {
+    // Default implementation ignores the previous result.
+    self.isReadOnly = isReadOnly;
+    return [self initWithStep:step];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
