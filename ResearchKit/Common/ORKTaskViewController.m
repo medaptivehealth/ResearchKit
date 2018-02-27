@@ -674,7 +674,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 [self goForward];
             }
         } else {
-            ORKStep *step = [[self task] stepWithIdentifier:@"1"];
+            ORKStep *step1 = [[self task] stepWithIdentifier:@"1"];
+            if (step1 != nil) {
+                step = step1;
+            }
             ORKStepViewController *stepVC = [self viewControllerForStep:step];
             [self showViewController:stepVC goForward:true animated:false];
         }
@@ -1382,6 +1385,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
         [strongDelegate taskViewController:self didChangeResult:[self result]];
     }
+    
 }
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
