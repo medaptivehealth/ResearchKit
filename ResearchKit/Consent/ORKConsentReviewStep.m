@@ -61,6 +61,7 @@
     step->_consentDocument = self.consentDocument;
     step->_signature = self.signature;
     step->_reasonForConsent = self.reasonForConsent;
+    step->_disagreeReasonForConsent = self.disagreeReasonForConsent;
     return step;
 }
 
@@ -70,6 +71,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, consentDocument, ORKConsentDocument);
         ORK_DECODE_OBJ_CLASS(aDecoder, signature, ORKConsentSignature);
         ORK_DECODE_OBJ_CLASS(aDecoder, reasonForConsent, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, disagreeReasonForConsent, NSString);
     }
     return self;
 }
@@ -79,6 +81,7 @@
     ORK_ENCODE_OBJ(aCoder, consentDocument);
     ORK_ENCODE_OBJ(aCoder, signature);
     ORK_ENCODE_OBJ(aCoder, reasonForConsent);
+    ORK_ENCODE_OBJ(aCoder, disagreeReasonForConsent);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -92,11 +95,12 @@
     return (isParentSame &&
             ORKEqualObjects(self.consentDocument, castObject.consentDocument) &&
             ORKEqualObjects(self.signature, castObject.signature) &&
-            ORKEqualObjects(self.reasonForConsent, castObject.reasonForConsent));
+            ORKEqualObjects(self.reasonForConsent, castObject.reasonForConsent) &&
+            ORKEqualObjects(self.disagreeReasonForConsent, castObject.disagreeReasonForConsent));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.consentDocument.hash ^ self.signature.hash ^ self.reasonForConsent.hash;
+    return super.hash ^ self.consentDocument.hash ^ self.signature.hash ^ self.reasonForConsent.hash ^ self.disagreeReasonForConsent.hash;
 }
 
 - (BOOL)showsProgress {

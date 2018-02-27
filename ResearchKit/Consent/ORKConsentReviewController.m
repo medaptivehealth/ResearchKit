@@ -144,8 +144,24 @@
 }
 
 - (IBAction)cancel {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(consentReviewControllerDidCancel:)]) {
-        [self.delegate consentReviewControllerDidCancel:self];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"CONSENT_REVIEW_ALERT_TITLE", nil)
+                                                                   message:self.localizedDisagreeReasonForConsent
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BOOL_NO", nil) style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BOOL_YES", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        // Have to dispatch, so following transition animation works
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self doCancel];
+        });
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)doCancel {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(consentReviewDidDisagree)]) {
+        [self.delegate consentReviewDidDisagree];
     }
 }
 

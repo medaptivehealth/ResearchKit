@@ -307,6 +307,13 @@
     }
 }
 
+- (void)notifyDelegateOnDisagree {
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(stepViewControllerDidFail:withError:)]) {
+        [strongDelegate stepViewControllerDidFail:self withError:nil];
+    }
+}
+
 - (BOOL)hasBeenPresented {
     return _hasBeenPresented;
 }

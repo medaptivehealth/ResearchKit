@@ -229,6 +229,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
     ORKConsentReviewController *reviewViewController = [[ORKConsentReviewController alloc] initWithHTML:html delegate:self];
     reviewViewController.localizedReasonForConsent = [[self consentReviewStep] reasonForConsent];
+    reviewViewController.localizedDisagreeReasonForConsent = [[self consentReviewStep] disagreeReasonForConsent];
     return reviewViewController;
 }
 
@@ -321,6 +322,11 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
 - (void)notifyDelegateOnResultChange {
     _currentSignature = nil;
     [super notifyDelegateOnResultChange];
+}
+
+- (void)notifyDelegateOnDisagree {
+    _currentSignature = nil;
+    [super notifyDelegateOnDisagree];
 }
 
 #pragma mark ORKStepViewControllerDelegate
@@ -454,6 +460,10 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     
     [self goForward];
 }
+
+     - (void)consentReviewDidDisagree {
+         [self notifyDelegateOnDisagree];
+     }
 
 static NSString *const _ORKCurrentSignatureRestoreKey = @"currentSignature";
 static NSString *const _ORKSignatureFirstRestoreKey = @"signatureFirst";

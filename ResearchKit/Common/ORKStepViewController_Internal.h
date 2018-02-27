@@ -71,6 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifyDelegateOnResultChange;
 
+- (void)notifyDelegateOnDisagree;
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 - (void)showValidityAlertWithMessage:(NSString *)text;

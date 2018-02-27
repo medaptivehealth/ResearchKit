@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)consentReviewControllerDidAcknowledge:(ORKConsentReviewController *)consentReviewController;
 - (void)consentReviewControllerDidCancel:(ORKConsentReviewController *)consentReviewController;
+- (void)consentReviewDidDisagree;
 
 @end
 
@@ -53,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<ORKConsentReviewControllerDelegate> delegate;
 
 @property (nonatomic, strong, nullable) NSString *localizedReasonForConsent;
+
+@property (nonatomic, strong, nullable) NSString *localizedDisagreeReasonForConsent;
 
 @end
 
