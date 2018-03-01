@@ -153,6 +153,9 @@
     NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
     if (![nextStepIdentifier isEqualToString:ORKNullStepIdentifier]) { // If ORKNullStepIdentifier, return nil to end task
         if (nextStepIdentifier) {
+            if ([nextStepIdentifier isEqualToString:@"-1"]) {
+                nextStepIdentifier = @"ThankYouScreen";
+            }
             nextStep = [self stepWithIdentifier:nextStepIdentifier];
             
             if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
