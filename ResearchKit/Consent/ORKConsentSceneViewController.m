@@ -75,7 +75,6 @@
     self.headerView.instructionLabel.hidden = ![consentSection summary].length;
     self.headerView.captionLabel.text = consentSection.title;
     
-    self.imageView.shouldApplyTint = consentSection.type != ORKConsentSectionTypeCustom;
     self.imageView.image = consentSection.image;
     self.headerView.instructionLabel.text = [consentSection summary];
     

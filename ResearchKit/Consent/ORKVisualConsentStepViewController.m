@@ -536,11 +536,6 @@
                       if (preloadNextViewController) {
                           ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
                           ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
-                          if (nextConsentSection.type != ORKConsentSectionTypeCustom) {
-                              [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
-                                                              tintColor:currentSceneImageView.tintColor
-                                                                  scale:currentSceneImageView.window.screen.scale];
-                          }
                       }
                   }];
 }
