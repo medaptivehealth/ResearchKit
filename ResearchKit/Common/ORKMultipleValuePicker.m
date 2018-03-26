@@ -86,9 +86,18 @@
 }
 
 - (void)setAnswer:(id)answer {
-    _answer = answer;
+    if (answer != nil) {
+        _answer = answer;
+    } else {
+        NSDate *today = [NSDate new];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:today];
+        NSString *month = [[[[NSDateFormatter alloc] init] monthSymbols][comps.month] capitalizedString];
+        _answer = @[month, [NSNumber numberWithInteger:comps.year]];
+    }
     
-    NSArray *indexNumbers = [self indexNumbersForAnswer:answer];
+    
+    NSArray *indexNumbers = [self indexNumbersForAnswer:_answer];
     if (indexNumbers) {
         [indexNumbers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop __unused) {
             NSUInteger pickerIdx = [self convertToPickerViewComponent:idx];
@@ -200,6 +209,26 @@
             *stop = YES;
         }
     }];
+    
+    if (answers.count == 2) {
+        NSString *yearString = answers[1];
+        NSInteger year = yearString.integerValue;
+        NSInteger monthRow = [_pickerView selectedRowInComponent:0] + 1;
+        
+        if ([self checkifIsFutureDate:monthRow year:year]) {
+            NSDate *today = [NSDate new];
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:today];
+            [answers removeAllObjects];
+            
+            id month = [self.helpers.firstObject answerForSelectedIndex:comps.month -1];
+            [answers addObject:[(NSArray*)month firstObject]];
+            [answers addObject:@(comps.year)];
+            
+            [_pickerView selectRow:comps.month -1 inComponent:0 animated:true];
+            [_pickerView selectRow:self.helpers[1].choiceCount -1 inComponent:1 animated:true];
+        }
+    }
 
     _answer = (answers.count == self.helpers.count) ? answers : ORKNullAnswerValue();
     if ([self.pickerDelegate respondsToSelector:@selector(picker:answerDidChangeTo:)]) {
@@ -207,6 +236,17 @@
     }
 }
 
+- (BOOL)checkifIsFutureDate:(NSInteger)month year:(NSInteger)year {
+    
+    NSDate *today = [NSDate new];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setMonth:month];
+    [components setYear:year];
+    NSDate *selectedDate = [calendar dateFromComponents:components];
+    
+    return [selectedDate compare:today] == NSOrderedDescending;
+}
 
 #pragma mark - Accessibility
 
@@ -242,14 +282,47 @@
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    NSUInteger idx = [self convertFromPickerViewComponent:component];
+    UILabel* tView = (UILabel*)view;
+    NSString *yearString = _answer[1];
+    NSInteger year = yearString.integerValue;
+
+    if (!tView)
+    {
+        tView = [[UILabel alloc] init];
+        //[tView setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+        tView.textAlignment = NSTextAlignmentCenter;
+        if (idx == 0) {
+            NSInteger monthRow = row + 1;
+            if ([self checkifIsFutureDate:monthRow year:year]) {
+                tView.textColor =  [UIColor lightGrayColor];
+            } else {
+                tView.textColor = [UIColor blackColor];
+            }
+        } else {
+            tView.textColor = [UIColor blackColor];
+        }
+        //tView.numberOfLines=3;
+    }
+    // Fill the label text here
+    if (idx == NSNotFound) {
+        tView.text = _separator;
+    } else {
+        tView.text = [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
+    }
+    
+    return tView;
+}
+
+/*- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSUInteger idx = [self convertFromPickerViewComponent:component];
     if (idx == NSNotFound) {
         return _separator;
     } else {
         return [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
     }
-}
+}*/
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self valueDidChange];
