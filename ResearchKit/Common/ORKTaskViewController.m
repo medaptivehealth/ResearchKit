@@ -674,7 +674,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 [self goForward];
             }
         } else {
-            ORKStep *step1 = [[self task] stepWithIdentifier:@"1"];
+            ORKStep *step1 = [[self task] stepWithIdentifier:@"Instruction"];
             if (step1 != nil) {
                 step = step1;
             }
