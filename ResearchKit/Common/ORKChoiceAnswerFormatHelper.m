@@ -47,8 +47,7 @@
     if (self) {
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKValuePickerAnswerFormat *valuePickerAnswerFormat = (ORKValuePickerAnswerFormat *)answerFormat;
-            ORKTextChoice *nullChoice = valuePickerAnswerFormat.nullTextChoice;
-            _choices = [@[nullChoice] arrayByAddingObjectsFromArray:valuePickerAnswerFormat.textChoices];
+            _choices = valuePickerAnswerFormat.textChoices;
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
             ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)answerFormat;
@@ -111,11 +110,7 @@
             value = _isValuePicker ? @(index - 1) : @(index);
         }
         
-        if (_isValuePicker && index == 0) {
-            // Don't add to answer array if this index is the 1st value of a value picker
-        } else {
-            [array addObject:value];
-        }
+        [array addObject:value];
     }
     return array.count > 0 ? [array copy] : ORKNullAnswerValue();
 }
