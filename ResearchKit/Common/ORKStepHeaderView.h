@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
 
+- (NSAttributedString *)getAttributedText:(NSString *)text withFontSize:(NSInteger)fontSize;
+
 @end
 
 NS_ASSUME_NONNULL_END

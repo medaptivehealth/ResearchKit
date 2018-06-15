@@ -53,39 +53,11 @@
     self.headerView.instructionLabel.hidden = ![_questionStep text].length;
     
     self.headerView.captionLabel.useSurveyMode = step.useSurveyMode;
-    self.headerView.captionLabel.attributedText = [self getAttributedQuestionTitle];
-    self.headerView.instructionLabel.attributedText = [self getAttributedQuestionText];
+    self.headerView.captionLabel.attributedText = [self.headerView getAttributedText:self.questionStep.title withFontSize:6];
+    self.headerView.instructionLabel.attributedText = [self.headerView getAttributedText:self.questionStep.text withFontSize:4];
     self.continueSkipContainer.optional = _questionStep.optional;
     
     [self.continueSkipContainer updateContinueAndSkipEnabled];
-}
-
-- (NSAttributedString *)getAttributedQuestionTitle {
-    NSString *openFont = @"<font size='6' style='font-family:HelveticaNeue-Light'>";
-    NSString *closeFont = @"</font>";
-    NSString *customTitle = [NSString stringWithFormat:@"%@%@%@", openFont, self.questionStep.title, closeFont];
-    NSError *error = nil;
-    NSMutableAttributedString *attts = [[NSMutableAttributedString alloc] initWithData:[customTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
-    NSRange range = NSMakeRange(0, attts.length);
-    NSMutableParagraphStyle *style =  [[NSMutableParagraphStyle alloc] init];
-    style.alignment = NSTextAlignmentCenter;
-    [attts addAttribute:NSParagraphStyleAttributeName value:style range:range];
-    
-    return attts;
-}
-
-- (NSAttributedString *)getAttributedQuestionText {
-    NSString *openFont = @"<font size='4' style='font-family:HelveticaNeue-Light'>";
-    NSString *closeFont = @"</font>";
-    NSString *customTitle = [NSString stringWithFormat:@"%@%@%@", openFont, self.questionStep.text, closeFont];
-    NSError *error = nil;
-    NSMutableAttributedString *attts = [[NSMutableAttributedString alloc] initWithData:[customTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
-    NSRange range = NSMakeRange(0, attts.length);
-    NSMutableParagraphStyle *style =  [[NSMutableParagraphStyle alloc] init];
-    style.alignment = NSTextAlignmentCenter;
-    [attts addAttribute:NSParagraphStyleAttributeName value:style range:range];
-    
-    return attts;
 }
 
 #pragma mark - Accessibility
