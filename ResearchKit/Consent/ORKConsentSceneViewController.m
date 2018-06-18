@@ -76,24 +76,11 @@
     self.headerView.captionLabel.text = consentSection.title;
     
     self.imageView.image = consentSection.image;
-    self.headerView.instructionLabel.attributedText = [self getAttributedSummary:consentSection.summary];
+    self.headerView.instructionLabel.attributedText = [self.headerView getAttributedText:consentSection.summary withFontSize:5];
+    [self getAttributedSummary:consentSection.summary];
     
     self.continueSkipContainer.continueEnabled = YES;
     [self.continueSkipContainer updateContinueAndSkipEnabled];
-}
-
-- (NSAttributedString *)getAttributedSummary:(NSString *)summary {
-    NSString *openFont = @"<font size='5' style='font-family:HelveticaNeue-Light'>";
-    NSString *closeFont = @"</font>";
-    NSString *customTitle = [NSString stringWithFormat:@"%@%@%@", openFont, summary, closeFont];
-    NSError *error = nil;
-    NSMutableAttributedString *attts = [[NSMutableAttributedString alloc] initWithData:[customTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
-    NSRange range = NSMakeRange(0, attts.length);
-    NSMutableParagraphStyle *style =  [[NSMutableParagraphStyle alloc] init];
-    style.alignment = NSTextAlignmentCenter;
-    [attts addAttribute:NSParagraphStyleAttributeName value:style range:range];
-    
-    return attts;
 }
 
 @end
