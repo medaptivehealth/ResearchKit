@@ -53,8 +53,8 @@
     self.headerView.instructionLabel.hidden = ![_questionStep text].length;
     
     self.headerView.captionLabel.useSurveyMode = step.useSurveyMode;
-    self.headerView.captionLabel.text = _questionStep.title;
-    self.headerView.instructionLabel.text = _questionStep.text;
+    self.headerView.captionLabel.attributedText = [self.headerView getAttributedText:self.questionStep.title withFontSize:6];
+    self.headerView.instructionLabel.attributedText = [self.headerView getAttributedText:self.questionStep.text withFontSize:4];
     self.continueSkipContainer.optional = _questionStep.optional;
     
     [self.continueSkipContainer updateContinueAndSkipEnabled];

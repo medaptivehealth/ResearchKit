@@ -76,7 +76,8 @@
     self.headerView.captionLabel.text = consentSection.title;
     
     self.imageView.image = consentSection.image;
-    self.headerView.instructionLabel.text = [consentSection summary];
+    self.headerView.instructionLabel.attributedText = [self.headerView getAttributedText:consentSection.summary withFontSize:5];
+    [self getAttributedSummary:consentSection.summary];
     
     self.continueSkipContainer.continueEnabled = YES;
     [self.continueSkipContainer updateContinueAndSkipEnabled];

@@ -442,4 +442,18 @@ const CGFloat IconHeight = 60;
     [super updateConstraints];
 }
 
+- (NSAttributedString *)getAttributedText:(NSString *)text withFontSize:(NSInteger)fontSize {
+    NSString *openFont = [NSString stringWithFormat:@"<font size='%d' style='font-family:HelveticaNeue-Light'>", fontSize];
+    NSString *closeFont = @"</font>";
+    NSString *customTitle = [NSString stringWithFormat:@"%@%@%@", openFont, text, closeFont];
+    NSError *error = nil;
+    NSMutableAttributedString *attts = [[NSMutableAttributedString alloc] initWithData:[customTitle dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
+    NSRange range = NSMakeRange(0, attts.length);
+    NSMutableParagraphStyle *style =  [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSTextAlignmentCenter;
+    [attts addAttribute:NSParagraphStyleAttributeName value:style range:range];
+    
+    return attts;
+}
+
 @end

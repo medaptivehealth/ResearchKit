@@ -170,8 +170,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             
             _headerView = _tableContainer.stepHeaderView;
             _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-            _headerView.captionLabel.text = self.questionStep.title;
-            _headerView.instructionLabel.text = self.questionStep.text;
+            
+            _headerView.captionLabel.attributedText = [_headerView getAttributedText:self.questionStep.title withFontSize:6];
+            _headerView.instructionLabel.attributedText = [_headerView getAttributedText:self.questionStep.text withFontSize:4];
             _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             
             _continueSkipView = _tableContainer.continueSkipContainerView;
