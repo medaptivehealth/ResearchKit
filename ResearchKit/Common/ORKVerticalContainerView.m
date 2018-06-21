@@ -762,7 +762,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                      relatedBy:NSLayoutRelationLessThanOrEqual
                                                                         toItem:self
                                                                      attribute:NSLayoutAttributeWidth
-                                                                    multiplier:1.0
+                                                                    multiplier:0.5
                                                                       constant:0.0]];
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_imageView
@@ -770,7 +770,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                      relatedBy:NSLayoutRelationLessThanOrEqual
                                                                         toItem:_customViewContainer
                                                                      attribute:NSLayoutAttributeHeight
-                                                                    multiplier:1.0
+                                                                    multiplier:1
                                                                       constant:0.0]];
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_imageView
                                                                      attribute:NSLayoutAttributeCenterX
