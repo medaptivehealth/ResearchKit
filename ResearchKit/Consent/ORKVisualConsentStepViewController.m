@@ -120,7 +120,7 @@
 }
 
 - (CGPoint)defaultFrameOrigin {
-    return (CGPoint){0, ORKGetMetricForWindow(ORKScreenMetricTopToIllustration, self.superview.window)};
+    return (CGPoint){self.bounds.size.width/2, ORKGetMetricForWindow(ORKScreenMetricTopToIllustration, self.superview.window)};
 }
 
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
@@ -202,7 +202,7 @@
     [_pageViewController didMoveToParentViewController:self];
     
     self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
-                          (CGRect){{0, 0}, {viewBounds.size.width, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
+                          (CGRect){{viewBounds.size.width/4, 0}, {viewBounds.size.width/2, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
     _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
     _animationView.backgroundColor = [UIColor clearColor];
     _animationView.userInteractionEnabled = NO;
