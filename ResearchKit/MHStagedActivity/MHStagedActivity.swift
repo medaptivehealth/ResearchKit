@@ -10,7 +10,7 @@ import Foundation
 
 public struct MHStagedActivity {
 
-    public var id: String?
+    public var id: String!
     public var title: String?
     public var type: MHStagedActivityType?
     public var schedule: MHStagedSchedule?
