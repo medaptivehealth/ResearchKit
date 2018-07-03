@@ -731,6 +731,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers separator:(NSString *)separator NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers separator:(NSString *)separator default:(id)defaultValue;
 /**
  An array of value pickers that represent the options to display in the picker. (read-only)
  */
@@ -740,6 +741,11 @@ ORK_CLASS_AVAILABLE
  A string used to define the separator for the format of the string. Default = " ".
  */
 @property (copy, readonly) NSString *separator;
+
+/**
+ An object used to set a default value
+ */
+@property (copy, readonly) id defaltValue;
 
 @end
 
