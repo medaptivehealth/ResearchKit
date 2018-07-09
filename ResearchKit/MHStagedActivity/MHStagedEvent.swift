@@ -17,11 +17,11 @@ public struct MHStagedEvent {
     public var status: MHStagedEventStatus?
     public var result: MHStagedEventResult?
     
-    public init(startDate: Date?, endDate: Date?, activity: MHStagedActivity) {
+    public init(startDate: Date?, endDate: Date?, activityId: String) {
         self.progress = Data()
         self.startDate = startDate
         self.endDate = endDate
-        self.activity = activity.id
+        self.activity = activityId
     }
 }
 
