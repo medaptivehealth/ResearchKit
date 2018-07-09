@@ -69,7 +69,7 @@
 
         _separator = answerFormat.separator ?: @" ";
         _shouldShowSeparator = [[_separator stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0;
-        _answer = answer;
+        _answer = answer ?: answerFormat.defaltValue;
         _pickerDelegate = delegate;
     }
     return self;

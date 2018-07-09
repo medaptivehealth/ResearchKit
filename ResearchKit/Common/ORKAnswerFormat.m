@@ -698,6 +698,20 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers separator:(NSString *)separator default:(id)defaultValue {
+    self = [super init];
+    if (self) {
+        for (ORKValuePickerAnswerFormat *valuePicker in valuePickers) {
+            // Do not show placeholder text for multiple component picker
+            [valuePicker setNullTextChoice: [ORKTextChoice choiceWithText:@"" value:ORKNullAnswerValue()]];
+        }
+        _valuePickers = ORKArrayCopyObjects(valuePickers);
+        _separator = [separator copy];
+        _defaltValue = defaultValue;
+    }
+    return self;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     for (ORKValuePickerAnswerFormat *valuePicker in self.valuePickers) {
