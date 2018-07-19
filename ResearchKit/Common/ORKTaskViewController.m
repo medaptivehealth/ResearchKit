@@ -660,7 +660,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!_hasBeenPresented) {
         // Add first step viewController
         ORKStep *step = [self nextStep];
-        if ([self shouldPresentStep:step] && !_isCompleted && _lastStepIdAnswered != nil) {
+        if ([self shouldPresentStep:step] && _lastStepIdAnswered != nil) {
             if (![step isKindOfClass:[ORKInstructionStep class]]) {
                 [self startAudioPromptSessionIfNeeded];
                 [self requestHealthAuthorizationWithCompletion:nil];
@@ -684,7 +684,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         _hasBeenPresented = YES;
     }
     if (_isCompleted) {
-        ORKStep *step = [[self task] stepWithIdentifier:@"1"];
+        ORKStep *step = [[self task] stepWithIdentifier:@"Instruction"];
         ORKStepViewController *stepVC = [self viewControllerForStep:step];
         //stepVC.navigationItem.leftBarButtonItem = NULL;
         [_managedStepIdentifiers removeAllObjects];
