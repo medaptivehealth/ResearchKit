@@ -674,18 +674,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 [self goForward];
             }
         } else {
-            ORKStep *step1 = [[self task] stepWithIdentifier:@"Instruction"];
+            ORKInstructionStep *step1 = [[self task] stepWithIdentifier:@"Instruction"];
             if (step1 != nil) {
                 step = step1;
             }
-            ORKStepViewController *stepVC = [self viewControllerForStep:step];
+            ORKInstructionStepViewController *stepVC = [self viewControllerForStep:step];
             [self showViewController:stepVC goForward:true animated:false];
         }
         _hasBeenPresented = YES;
     }
     if (_isCompleted) {
-        ORKStep *step = [[self task] stepWithIdentifier:@"Instruction"];
-        ORKStepViewController *stepVC = [self viewControllerForStep:step];
+        ORKInstructionStep *step = [[self task] stepWithIdentifier:@"Instruction"];
+        ORKInstructionStepViewController *stepVC = [self viewControllerForStep:step];
         //stepVC.navigationItem.leftBarButtonItem = NULL;
         [_managedStepIdentifiers removeAllObjects];
         [self showViewController:stepVC goForward:NO animated:NO];
@@ -1262,7 +1262,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         isStandaloneReviewStep = reviewStep.isStandalone;
     }
     
-    if ((isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
+    if (isCurrentInstructionStep  || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];
