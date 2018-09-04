@@ -388,7 +388,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)updateButtonStates {
-    if ([self isStepImmediateNavigation]) {
+    if ([self isStepImmediateNavigation] && !self.isReadOnly) {
         _continueSkipView.neverHasContinueButton = YES;
         _continueSkipView.continueButtonItem = nil;
     }
@@ -511,7 +511,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)continueButtonEnabled {
-    BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    BOOL enabled = ([self hasAnswer] || self.isReadOnly || (self.questionStep.optional && !self.skipButtonItem));
     if (self.isBeingReviewed) {
         enabled = enabled && (![self.answer isEqual:self.originalAnswer]);
     }
