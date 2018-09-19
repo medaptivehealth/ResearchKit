@@ -33,6 +33,7 @@
 "CONSENT_NAME_GIVEN" = "Nombre";
 "CONSENT_NAME_FAMILY" = "Apellidos";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatorio";
+"CONSENT_NAME_MISMATCH" = "El nombre que usó durante el registro (% @% @) debe coincidir exactamente con el nombre que usa para firmar su formulario de consentimiento.";
 "CONSENT_REVIEW_TITLE" = "Revisar";
 "CONSENT_REVIEW_INSTRUCTION" = "Revisa el siguiente formulario y pulsa Acepto si estás listo para continuar.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Revisar";
