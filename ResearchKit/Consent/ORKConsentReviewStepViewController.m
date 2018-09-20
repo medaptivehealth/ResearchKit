@@ -218,7 +218,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     if (index != NSNotFound) {
         ORKConsentSignature *signature = document.signatures[index];
         
-        if (signature.requiresName) {
+        if (signature.requiresName && signature.givenName == NULL && signature.familyName == NULL) {
             signature.givenName = _signatureFirst;
             signature.familyName = _signatureLast;
         }
@@ -284,7 +284,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     if (!_currentSignature) {
         _currentSignature = [[self.consentReviewStep signature] copy];
         
-        if (_currentSignature.requiresName) {
+        if (_currentSignature.requiresName && _currentSignature.givenName == NULL && _currentSignature.familyName == NULL) {
             _currentSignature.givenName = _signatureFirst;
             _currentSignature.familyName = _signatureLast;
         }
@@ -352,7 +352,33 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         [self goForward];
     } else {
         // Navigate within our managed steps
-        [self goToPage:(_currentPageIndex + delta) animated:YES];
+        ORKConsentReviewPhase phase = ((NSNumber *)_pageIndices[_currentPageIndex]).integerValue;
+        
+        switch (phase) {
+            case ORKConsentReviewPhaseName: {
+                if ([_signatureFirst isEqualToString:_currentSignature.givenName] && [_signatureLast isEqualToString:_currentSignature.familyName]) {
+                    [self goToPage:(_currentPageIndex + delta) animated:YES];
+                } else {
+                    NSString *msg = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_NAME_MISMATCH", nil), _currentSignature.givenName , _currentSignature.familyName];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alert setMessage: msg];
+            
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alert addAction:okAction];
+                    [[self navigationController] presentViewController:alert animated:true completion:^{
+                        
+                    }];
+                }
+                break;
+            }
+            default: {
+                [self goToPage:(_currentPageIndex + delta) animated:YES];
+                break;
+            }
+        }
     }
 }
 
