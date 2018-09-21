@@ -954,7 +954,7 @@
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell {
     _currentFirstResponderCell = cell;
     NSIndexPath *path = [_tableView indexPathForCell:cell];
-    if (path) {
+    if (path && ![cell isKindOfClass:[ORKFormItemTextFieldCell class]]) {
         [_tableContainer scrollCellVisible:cell animated:YES];
     }
 }
