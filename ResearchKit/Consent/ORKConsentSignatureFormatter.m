@@ -45,6 +45,9 @@
     NSString *hr = @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />";
 
     NSString *signatureElementWrapper = @"<p><br/><div class='sigbox'><div class='inbox'>%@</div></div>%@%@</p>";
+    
+    NSString *textAtBottom = @"<div class='namebox'>%@</div>";
+    
 
     BOOL addedSig = NO;
 
@@ -73,7 +76,8 @@
         }
 
         NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);
-        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, nameStr, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
+        NSString *signatureNameWrapper = [NSString stringWithFormat: textAtBottom, nameStr];
+        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signatureNameWrapper, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
     }
 
     if (signature.requiresSignatureImage || signature.signatureImage) {
@@ -91,7 +95,8 @@
     }
 
     if (addedSig) {
-        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate ? : @"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
+        NSString *signatureDateWrapper = [NSString stringWithFormat: textAtBottom, signature.signatureDate ? : @"&nbsp;"];
+        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signatureDateWrapper, hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
     }
 
     NSInteger numElements = signatureElements.count;
