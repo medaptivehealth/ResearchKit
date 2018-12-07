@@ -291,7 +291,7 @@
     if (!tView)
     {
         tView = [[UILabel alloc] init];
-        //[tView setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+        [tView setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         tView.textAlignment = NSTextAlignmentCenter;
         if (idx == 0) {
             NSInteger monthRow = row + 1;
@@ -314,15 +314,6 @@
     
     return tView;
 }
-
-/*- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSUInteger idx = [self convertFromPickerViewComponent:component];
-    if (idx == NSNotFound) {
-        return _separator;
-    } else {
-        return [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
-    }
-}*/
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self valueDidChange];
