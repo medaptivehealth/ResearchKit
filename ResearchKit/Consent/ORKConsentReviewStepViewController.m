@@ -284,6 +284,9 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     if (!_currentSignature) {
         _currentSignature = [[self.consentReviewStep signature] copy];
         
+        _currentSignature.givenName = [_currentSignature.givenName stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+        _currentSignature.familyName = [_currentSignature.familyName stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+        
         if (_currentSignature.requiresName && _currentSignature.givenName == NULL && _currentSignature.familyName == NULL) {
             _currentSignature.givenName = _signatureFirst;
             _currentSignature.familyName = _signatureLast;
@@ -291,6 +294,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         if (_currentSignature.requiresSignatureImage) {
             _currentSignature.signatureImage = _signatureImage;
         }
+        
         
         if (_currentSignature.signatureDateFormatString.length > 0) {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -426,9 +430,9 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         // If this is the form step then update the values from the form
         ORKStepResult *result = [stepViewController result];
         ORKTextQuestionResult *fnr = (ORKTextQuestionResult *)[result resultForIdentifier:_GivenNameIdentifier];
-        _signatureFirst = (NSString *)fnr.textAnswer;
+        _signatureFirst = [(NSString *)fnr.textAnswer stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
         ORKTextQuestionResult *lnr = (ORKTextQuestionResult *)[result resultForIdentifier:_FamilyNameIdentifier];
-        _signatureLast = (NSString *)lnr.textAnswer;
+        _signatureLast = [(NSString *)lnr.textAnswer stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
         [self notifyDelegateOnResultChange];
         
     } else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
