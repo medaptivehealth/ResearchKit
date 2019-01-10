@@ -46,7 +46,7 @@
 
 
 @implementation ORKNavigableOrderedTask {
-    NSMutableDictionary<NSString *, ORKStepNavigationRule *> *_stepNavigationRules;
+    NSMutableDictionary<NSString *, NSMutableArray<ORKStepNavigationRule *> *> *_stepNavigationRules;
     NSMutableDictionary<NSString *, ORKSkipStepNavigationRule *> *_skipStepNavigationRules;
     NSMutableDictionary<NSString *, ORKStepModifier *> *_stepModifiers;
 }
@@ -68,10 +68,13 @@
     if (!_stepNavigationRules) {
         _stepNavigationRules = [NSMutableDictionary new];
     }
-    _stepNavigationRules[triggerStepIdentifier] = stepNavigationRule;
+    if (!_stepNavigationRules[triggerStepIdentifier]) {
+        _stepNavigationRules[triggerStepIdentifier] = [NSMutableArray new];
+    }
+    [_stepNavigationRules[triggerStepIdentifier] addObject:stepNavigationRule];
 }
 
-- (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
+- (NSArray<ORKStepNavigationRule *> *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(triggerStepIdentifier);
 
     return _stepNavigationRules[triggerStepIdentifier];
@@ -149,26 +152,31 @@
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *nextStep = nil;
-    ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
-    NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
-    if (![nextStepIdentifier isEqualToString:ORKNullStepIdentifier]) { // If ORKNullStepIdentifier, return nil to end task
-        if (nextStepIdentifier) {
-            if ([nextStepIdentifier isEqualToString:@"-1"]) {
-                nextStepIdentifier = @"ThankYouScreen";
+    NSArray<ORKStepNavigationRule *> *navigationRules = _stepNavigationRules[step.identifier];
+    
+    for (ORKStepNavigationRule * rule in navigationRules) {
+        NSString *nextStepIdentifier = [rule identifierForDestinationStepWithTaskResult:result];
+        if (![nextStepIdentifier isEqualToString:ORKNullStepIdentifier] && nextStep == Nil) { // If ORKNullStepIdentifier, return nil to end task
+            if (nextStepIdentifier) {
+                if ([nextStepIdentifier isEqualToString:@"-1"]) {
+                    nextStepIdentifier = @"ThankYouScreen";
+                }
+                nextStep = [self stepWithIdentifier:nextStepIdentifier];
+                
+                if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
+                    ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules. Also please note that you'll get duplicate result entries each time you loop over the same step.", nextStep.identifier, step.identifier);
+                }
             }
-            nextStep = [self stepWithIdentifier:nextStepIdentifier];
             
-            if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
-                ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules. Also please note that you'll get duplicate result entries each time you loop over the same step.", nextStep.identifier, step.identifier);
+            ORKSkipStepNavigationRule *skipNavigationRule = _skipStepNavigationRules[nextStep.identifier];
+            if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
+                return [self stepAfterStep:nextStep withResult:result];
             }
-        } else {
-            nextStep = [super stepAfterStep:step withResult:result];
         }
-        
-        ORKSkipStepNavigationRule *skipNavigationRule = _skipStepNavigationRules[nextStep.identifier];
-        if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
-            return [self stepAfterStep:nextStep withResult:result];
-        }
+    }
+    
+    if ([navigationRules count] == 0 || nextStep == nil) {
+        nextStep = [super stepAfterStep:step withResult:result];
     }
     
     if (nextStep != nil) {
