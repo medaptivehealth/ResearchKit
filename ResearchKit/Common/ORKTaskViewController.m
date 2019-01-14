@@ -1236,8 +1236,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
-    // Should we also include visualConsentStep here? Others?
-    BOOL isCurrentInstructionStep = [self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]];
     
     // [self result] would not include any results beyond current step.
     // Use _managedResults to get the completed result set.
@@ -1256,7 +1254,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         isStandaloneReviewStep = reviewStep.isStandalone;
     }
     
-    if (isCurrentInstructionStep  || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
+    if (isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];
