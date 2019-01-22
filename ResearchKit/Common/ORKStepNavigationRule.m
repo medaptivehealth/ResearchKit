@@ -204,7 +204,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
             break;
         }
     }
-    return destinationStepIdentifier ? : _defaultStepIdentifier;
+    return destinationStepIdentifier;
 }
 
 #pragma mark NSSecureCoding
