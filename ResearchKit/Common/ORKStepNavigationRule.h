@@ -79,6 +79,8 @@ ORK_CLASS_AVAILABLE
  */
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult;
 
+- (NSString *)defaultStepIdentifier;
+
 @end
 
 

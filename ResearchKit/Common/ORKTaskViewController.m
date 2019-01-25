@@ -656,10 +656,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!_task) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Attempted to present task view controller without a task" userInfo:nil];
     }
-    
+    ORKStep *step = [self nextStep];
     if (!_hasBeenPresented) {
         // Add first step viewController
-        ORKStep *step = [self nextStep];
+        
         if ([self shouldPresentStep:step] && _lastStepIdAnswered != nil) {
             if (![step isKindOfClass:[ORKInstructionStep class]]) {
                 [self startAudioPromptSessionIfNeeded];
@@ -674,19 +674,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 [self goForward];
             }
         } else {
-            ORKInstructionStep *step1 = [[self task] stepWithIdentifier:@"Instruction"];
-            if (step1 != nil) {
-                step = step1;
-            }
-            ORKInstructionStepViewController *stepVC = [self viewControllerForStep:step];
+            ORKStepViewController *stepVC = [self viewControllerForStep:step];
             [self showViewController:stepVC goForward:true animated:false];
         }
         _hasBeenPresented = YES;
     }
     if (_isCompleted) {
-        ORKInstructionStep *step = [[self task] stepWithIdentifier:@"Instruction"];
-        ORKInstructionStepViewController *stepVC = [self viewControllerForStep:step];
-        //stepVC.navigationItem.leftBarButtonItem = NULL;
+        ORKStepViewController *stepVC = [self viewControllerForStep:step];
         [_managedStepIdentifiers removeAllObjects];
         [self showViewController:stepVC goForward:NO animated:NO];
     }
@@ -1242,8 +1236,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
-    // Should we also include visualConsentStep here? Others?
-    BOOL isCurrentInstructionStep = [self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]];
     
     // [self result] would not include any results beyond current step.
     // Use _managedResults to get the completed result set.
@@ -1262,7 +1254,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         isStandaloneReviewStep = reviewStep.isStandalone;
     }
     
-    if (isCurrentInstructionStep  || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
+    if (isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];
