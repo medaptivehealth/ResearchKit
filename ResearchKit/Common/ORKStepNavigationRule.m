@@ -54,6 +54,10 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
     @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
 }
 
+- (NSString *)defaultStepIdentifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
+}
+
 #pragma mark NSSecureCoding
 
 + (BOOL)supportsSecureCoding {
@@ -204,7 +208,11 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
             break;
         }
     }
-    return destinationStepIdentifier ? : _defaultStepIdentifier;
+    return destinationStepIdentifier;
+}
+
+- (NSString *)defaultStepIdentifier {
+    return _defaultStepIdentifier;
 }
 
 #pragma mark NSSecureCoding
