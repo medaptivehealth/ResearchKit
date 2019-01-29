@@ -175,7 +175,11 @@
         }
     }
     
-    if ([navigationRules count] == 0 || nextStep == nil) {
+    if ([navigationRules count] > 0 && nextStep == nil) {
+        ORKStepNavigationRule *rule = navigationRules.firstObject;
+        NSString *stepID = [rule defaultStepIdentifier];
+        nextStep = [self stepWithIdentifier:stepID];
+    } else if ([navigationRules count] == 0 || nextStep == nil) {
         nextStep = [super stepAfterStep:step withResult:result];
     }
     
