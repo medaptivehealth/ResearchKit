@@ -138,6 +138,7 @@ ORK_CLASS_AVAILABLE
  The primary text to display for the step in a localized string.
  */
 @property (nonatomic, copy, nullable) NSString *title;
+
 /**
  Additional text to display for the step in a localized string.
  
