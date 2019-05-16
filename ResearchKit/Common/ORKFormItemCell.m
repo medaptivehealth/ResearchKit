@@ -467,13 +467,6 @@ static const CGFloat HorizontalMargin = 15.0;
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    // Ask table view to adjust scrollview's position
-    self.editingHighlight = YES;
-    [self.delegate formItemCellDidBecomeFirstResponder:self];
-    UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField.text.length > 0 && ![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
