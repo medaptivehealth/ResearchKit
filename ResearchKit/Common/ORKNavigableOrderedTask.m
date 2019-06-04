@@ -178,6 +178,9 @@
     if ([navigationRules count] > 0 && nextStep == nil) {
         ORKStepNavigationRule *rule = navigationRules.firstObject;
         NSString *stepID = [rule defaultStepIdentifier];
+        if ([stepID isEqualToString:@"-1"]) {
+            stepID = @"ThankYouScreen";
+        }
         nextStep = [self stepWithIdentifier:stepID];
     } else if ([navigationRules count] == 0 || nextStep == nil) {
         nextStep = [super stepAfterStep:step withResult:result];
