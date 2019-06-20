@@ -206,7 +206,7 @@
 
     if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0 ) {
         ORKStep *prevStep = [self stepWithIdentifier:result.results[indexOfCurrentStepResult - 1].identifier];
-        previousStep = [prevStep isKindOfClass:ORKInstructionStep.class] ? nil : prevStep;
+        previousStep = prevStep;
     }
     return previousStep;
 }
