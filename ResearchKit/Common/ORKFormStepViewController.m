@@ -321,6 +321,12 @@
     return [self ORKFormStepViewController_initWithResult:result];
 }
 
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result isReadOnly:(BOOL) isReadOnly {
+    self.isReadOnly = isReadOnly;
+    self = [super initWithStep:step];
+    return [self ORKFormStepViewController_initWithResult:result];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self stepDidChange];
