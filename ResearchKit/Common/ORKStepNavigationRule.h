@@ -196,7 +196,7 @@ ORK_CLASS_AVAILABLE
 /**
  The identifier of the step that is used if none of the result predicates match.
  */
-@property (nonatomic, copy, readonly, nullable) NSString *defaultStepIdentifier;
+@property (nonatomic, copy, readonly) NSString *defaultStepIdentifier;
 
 @end
 

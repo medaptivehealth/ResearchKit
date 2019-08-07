@@ -443,7 +443,7 @@ const CGFloat IconHeight = 60;
 }
 
 - (NSAttributedString *)getAttributedText:(NSString *)text withFontSize:(NSInteger)fontSize {
-    NSString *openFont = [NSString stringWithFormat:@"<font size='%d' style='font-family:HelveticaNeue-Light'>", fontSize];
+    NSString *openFont = [NSString stringWithFormat:@"<font size='%ld' style='font-family:HelveticaNeue-Light'>", (long)fontSize];
     NSString *closeFont = @"</font>";
     NSString *customTitle = [NSString stringWithFormat:@"%@%@%@", openFont, text, closeFont];
     NSError *error = nil;
