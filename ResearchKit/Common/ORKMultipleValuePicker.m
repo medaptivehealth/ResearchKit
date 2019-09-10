@@ -285,7 +285,12 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     NSUInteger idx = [self convertFromPickerViewComponent:component];
     UILabel* tView = (UILabel*)view;
-    NSString *yearString = _answer[1];
+    NSString *yearString = @"1901";
+    if (![_answer isNull]) {
+        NSLog(@"Answer is not null");
+        yearString = _answer[1];
+    }
+    
     NSInteger year = yearString.integerValue;
 
     if (!tView)
