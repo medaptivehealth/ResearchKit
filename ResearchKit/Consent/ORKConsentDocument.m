@@ -156,10 +156,11 @@
 
 + (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile {
     NSMutableString *html = [NSMutableString string];
-    
+    NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>";
     [html appendString:@"<html><head><style>"];
     [html appendString:[[self class] cssStyleSheet:mobile]];
     [html appendString:@"</style></head><body>"];
+    [html appendString:headerString];
     [html appendString:body];
     [html appendString:@"</body></html>"];
     
