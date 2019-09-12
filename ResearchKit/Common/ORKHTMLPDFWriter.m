@@ -83,13 +83,13 @@ static const CGFloat LetterHeight = 11.0f;
 @end
 
 
-@interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
+@interface ORKHTMLPDFWriter () <WKNavigationDelegate> {
     id _selfRetain;
 }
 
 @property (nonatomic) CGSize pageSize;
 @property (nonatomic) UIEdgeInsets pageMargins;
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, copy) NSError *error;
 @property (nonatomic, copy) void (^completionBlock)(NSData *data, NSError *error);
@@ -111,8 +111,8 @@ static const CGFloat PageEdge = 72.0 / 4;
     _data = nil;
     _error = nil;
     
-    self.webView = [[UIWebView alloc] init];
-    self.webView.delegate = self;
+    self.webView = [[WKWebView alloc] init];
+    self.webView.navigationDelegate = self;
     [self.webView loadHTMLString:html baseURL:ORKCreateRandomBaseURL()];
     
     _selfRetain = self;
@@ -173,11 +173,20 @@ static const CGFloat PageEdge = 72.0 / 4;
     return pageSize;
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKNavigationDelegate
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-    BOOL complete = [readyState isEqualToString:@"complete"];
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    __block BOOL complete = NO;
+    
+    [webView evaluateJavaScript:@"docuemnt.readyState" completionHandler:^(id _Nullable readyState, NSError * _Nullable error) {
+        if (error == nil) {
+            if (readyState != nil) {
+                complete = [readyState isEqualToString:@"complete"];
+            }
+        } else {
+            NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
+        }
+    }];
     
     [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeout) object:nil];
     
@@ -188,7 +197,7 @@ static const CGFloat PageEdge = 72.0 / 4;
     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeout) object:nil];
     
     _error = error;

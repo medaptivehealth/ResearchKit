@@ -30,6 +30,7 @@
 
 
 @import UIKit;
+@import WebKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
