@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.public_header_files = `./scripts/find_headers.rb --public --private`.split("\n")
   s.source_files = 'ResearchKit/**/*.{h,m,swift}'
   s.resources    = 'ResearchKit/**/*.{fsh,vsh}', 'ResearchKit/Animations/**/*.m4v', 'ResearchKit/Artwork.xcassets', 'ResearchKit/Localized/*.lproj'
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '11.0'
   s.requires_arc = true
 end
