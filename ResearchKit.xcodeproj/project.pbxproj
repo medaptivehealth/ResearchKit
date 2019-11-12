@@ -2873,9 +2873,9 @@
 			productReference = 86CC8E9A1AC09332001CCD89 /* ResearchKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B183A4731A8535D100C76870 /* ResearchKit */ = {
+		B183A4731A8535D100C76870 /* MedaptiveHealthResearchKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B183A5921A8535D100C76870 /* Build configuration list for PBXNativeTarget "ResearchKit" */;
+			buildConfigurationList = B183A5921A8535D100C76870 /* Build configuration list for PBXNativeTarget "MedaptiveHealthResearchKit" */;
 			buildPhases = (
 				B183A4741A8535D100C76870 /* Headers */,
 				B183A4F71A8535D100C76870 /* Sources */,
@@ -2887,7 +2887,7 @@
 			);
 			dependencies = (
 			);
-			name = ResearchKit;
+			name = MedaptiveHealthResearchKit;
 			productName = ResearchKit;
 			productReference = B183A5951A8535D100C76870 /* ResearchKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -2975,7 +2975,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B183A4731A8535D100C76870 /* ResearchKit */,
+				B183A4731A8535D100C76870 /* MedaptiveHealthResearchKit */,
 				86CC8E991AC09332001CCD89 /* ResearchKitTests */,
 				B18FF3A41A9FE25700C0C3B0 /* docs */,
 			);
@@ -3327,12 +3327,12 @@
 /* Begin PBXTargetDependency section */
 		86CC8EA21AC09332001CCD89 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B183A4731A8535D100C76870 /* ResearchKit */;
+			target = B183A4731A8535D100C76870 /* MedaptiveHealthResearchKit */;
 			targetProxy = 86CC8EA11AC09332001CCD89 /* PBXContainerItemProxy */;
 		};
 		B11DF3B11AA10795009E76D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B183A4731A8535D100C76870 /* ResearchKit */;
+			target = B183A4731A8535D100C76870 /* MedaptiveHealthResearchKit */;
 			targetProxy = B11DF3B01AA10795009E76D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -4008,7 +4008,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B183A5921A8535D100C76870 /* Build configuration list for PBXNativeTarget "ResearchKit" */ = {
+		B183A5921A8535D100C76870 /* Build configuration list for PBXNativeTarget "MedaptiveHealthResearchKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B183A5931A8535D100C76870 /* Debug */,
