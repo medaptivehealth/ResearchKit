@@ -28,8 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKOrderedTask.h>
+#import "ORKStep.h"
+#import "ORKOrderedTask.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

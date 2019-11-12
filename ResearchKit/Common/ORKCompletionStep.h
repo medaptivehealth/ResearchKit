@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import <ResearchKit/ORKInstructionStep.h>
+#import "ORKInstructionStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import "ResearchKit.h"
 #import <AVFoundation/AVFoundation.h>
 
 

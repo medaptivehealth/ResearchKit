@@ -31,8 +31,8 @@
 
 @import Foundation;
 @import AudioToolbox;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStep.h>
+#import "ORKDefines.h"
+#import "ORKActiveStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -31,8 +31,8 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKErrors.h>
-#import <ResearchKit/ORKDefines.h>
+#import "ORKErrors.h"
+#import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

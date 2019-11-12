@@ -31,7 +31,7 @@
 
 @import UIKit;
 @import CoreLocation;
-#import <ResearchKit/ORKRecorder.h>
+#import "ORKRecorder.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
