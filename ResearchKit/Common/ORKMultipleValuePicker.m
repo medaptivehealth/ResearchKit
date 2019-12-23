@@ -92,7 +92,11 @@
         NSDate *today = [NSDate new];
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:today];
-        NSString *month = [[[[NSDateFormatter alloc] init] monthSymbols][comps.month] capitalizedString];
+        NSInteger montInt = comps.month;
+        if (montInt > 0) {
+            montInt -= 1;
+        }
+        NSString *month = [[[[NSDateFormatter alloc] init] monthSymbols][montInt] capitalizedString];
         _answer = @[month, [NSNumber numberWithInteger:comps.year]];
     }
     
