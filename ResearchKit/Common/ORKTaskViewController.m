@@ -35,6 +35,7 @@
 #import "ORKInstructionStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
 #import "ORKQuestionStepViewController.h"
+#import "ORKCompletionStepViewController.h"
 #import "ORKReviewStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTappingIntervalStepViewController.h"
@@ -1350,10 +1351,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         [self flipToPreviousPageFrom:stepViewController];
     }
+    
     NSLog(@"Results: %lu", [[[stepViewController result] results] count]);
     if ([[[stepViewController result] results] count] > 0 && _shouldGoForward) {
-        ORKQuestionResult *res = (ORKQuestionResult *)[[[stepViewController result] results] firstObject];
-        if (_lastStepIdAnswered != NULL && ![[res identifier] isEqualToString:_lastStepIdAnswered]) {
+        NSString *stepIdentifier = [[stepViewController result] identifier];
+        if (_lastStepIdAnswered != NULL && ![stepIdentifier isEqualToString:_lastStepIdAnswered]) {
             [self goForward];
         } else {
             _shouldGoForward = false;
@@ -1364,6 +1366,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         _shouldGoForward = false;
     }
+    
 }
 
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(NSError *)error {
