@@ -342,6 +342,16 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted;
 
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate completed:(BOOL)isCompleted isReadOnly:(BOOL)isReadOnly;
+
+/**
+ Finish task with reason
+ 
+    This is called after user complete the task of if the user decide cancel the operation
+ 
+ @param reason The reason why the task finish `ORKTaskViewControllerFinishReason`
+ */
+- (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error;
+
 /**
  The delegate for the task view controller.
  
@@ -459,6 +469,11 @@ ORK_CLASS_AVAILABLE
 */
 
 @property (nonatomic, strong, nullable) NSString *lastStepIdAnswered;
+
+/**
+ The action of press cancel button
+*/
+- (IBAction)cancelAction:(UIBarButtonItem *)sender;
 
 /**
  Forces navigation to the next step.
