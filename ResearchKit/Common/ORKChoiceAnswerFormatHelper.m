@@ -144,7 +144,12 @@
             if (nil == matchedChoice) {
                 NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
                 if (_isValuePicker) {
-                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue + 1];
+                    NSInteger index = ((NSNumber *)answerValue).unsignedIntegerValue + 1;
+                    if (_choices.count >  index) {
+                        matchedChoice = _choices[index];
+                    } else {
+                        matchedChoice = _choices[_choices.count - 1];
+                    }
                 } else {
                     matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue];
                 }
