@@ -1346,27 +1346,30 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [strongDelegate taskViewController:self stepViewControllerWillDisappear:stepViewController navigationDirection:direction];
     }
     
-    if (direction == ORKStepViewControllerNavigationDirectionForward) {
-        [self flipToNextPageFrom:stepViewController];
-    } else {
-        [self flipToPreviousPageFrom:stepViewController];
-    }
-    
-    NSLog(@"Results: %lu", [[[stepViewController result] results] count]);
-    if ([[[stepViewController result] results] count] > 0 && _shouldGoForward) {
-        NSString *stepIdentifier = [[stepViewController result] identifier];
-        if (_lastStepIdAnswered != NULL && ![stepIdentifier isEqualToString:_lastStepIdAnswered]) {
+    ORKStep *nextStep = [self nextStep];
+    if (![[_managedStepIdentifiers firstObject] isEqualToString:_lastStepIdAnswered]) {
+        if (direction == ORKStepViewControllerNavigationDirectionForward) {
+            [self flipToNextPageFrom:stepViewController];
+        } else {
+            [self flipToPreviousPageFrom:stepViewController];
+        }
+        if (![nextStep.identifier isEqualToString:_lastStepIdAnswered] && _shouldGoForward) {
+            NSString *stepIdentifier = [[stepViewController result] identifier];
+            if (_lastStepIdAnswered != NULL && ![stepIdentifier isEqualToString:_lastStepIdAnswered]) {
+                [self goForward];
+            } else {
+                _shouldGoForward = false;
+                _lastStepIdAnswered = nil;
+            }
+        } else if (![nextStep.identifier isEqualToString:_lastStepIdAnswered] && [stepViewController isKindOfClass:[ORKInstructionStepViewController class]] && _shouldGoForward) {
             [self goForward];
         } else {
             _shouldGoForward = false;
+            _lastStepIdAnswered = nil;
         }
-        
-    } else if ([stepViewController isKindOfClass:[ORKInstructionStepViewController class]] && _shouldGoForward) {
-        [self goForward];
     } else {
-        _shouldGoForward = false;
+        _lastStepIdAnswered = nil;
     }
-    
 }
 
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(NSError *)error {
