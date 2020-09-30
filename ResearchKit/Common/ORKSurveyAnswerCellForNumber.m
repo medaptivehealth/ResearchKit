@@ -144,10 +144,9 @@
 - (BOOL)isAnswerValid {
     id answer = self.answer;
     
-    if (answer == ORKNullAnswerValue()) {
+    if ((answer == ORKNullAnswerValue()) || (answer == nil)) {
         return YES;
     }
-    
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKNumericAnswerFormat *numericFormat = (ORKNumericAnswerFormat *)answerFormat;
     return [numericFormat isAnswerValidWithString:self.textField.text];
