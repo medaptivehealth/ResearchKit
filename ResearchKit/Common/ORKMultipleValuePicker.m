@@ -213,26 +213,6 @@
             *stop = YES;
         }
     }];
-    
-    if (answers.count == 2) {
-        NSString *yearString = answers[1];
-        NSInteger year = yearString.integerValue;
-        NSInteger monthRow = [_pickerView selectedRowInComponent:0] + 1;
-        
-        if ([self checkifIsFutureDate:monthRow year:year]) {
-            NSDate *today = [NSDate new];
-            NSCalendar *calendar = [NSCalendar currentCalendar];
-            NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:today];
-            [answers removeAllObjects];
-            
-            id month = [self.helpers.firstObject answerForSelectedIndex:comps.month -1];
-            [answers addObject:[(NSArray*)month firstObject]];
-            [answers addObject:@(comps.year)];
-            
-            [_pickerView selectRow:comps.month -1 inComponent:0 animated:true];
-            [_pickerView selectRow:self.helpers[1].choiceCount -1 inComponent:1 animated:true];
-        }
-    }
 
     _answer = (answers.count == self.helpers.count) ? answers : ORKNullAnswerValue();
     if ([self.pickerDelegate respondsToSelector:@selector(picker:answerDidChangeTo:)]) {
@@ -302,17 +282,7 @@
         tView = [[UILabel alloc] init];
         [tView setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         tView.textAlignment = NSTextAlignmentCenter;
-        if (idx == 0) {
-            NSInteger monthRow = row + 1;
-            if ([self checkifIsFutureDate:monthRow year:year]) {
-                tView.textColor =  [UIColor lightGrayColor];
-            } else {
-                tView.textColor = [UIColor blackColor];
-            }
-        } else {
-            tView.textColor = [UIColor blackColor];
-        }
-        //tView.numberOfLines=3;
+        tView.textColor = [UIColor blackColor];
     }
     // Fill the label text here
     if (idx == NSNotFound) {
