@@ -267,7 +267,7 @@
     }
     
     [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
-    [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+    [fileManager setAttributes:@{NSFileProtectionKey: NSFileProtectionComplete} ofItemAtPath:[url path] error:error];
     return YES;
 }
 

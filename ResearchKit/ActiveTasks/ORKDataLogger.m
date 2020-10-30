@@ -800,7 +800,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         assert(fileHandle);
         
         // Set file protection after opening the file, so that class B works as expected.
-        BOOL success = [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(self.fileProtectionMode)} ofItemAtPath:[url path] error:error];
+        BOOL success = [fileManager setAttributes:@{NSFileProtectionKey: NSFileProtectionComplete} ofItemAtPath:[url path] error:error];
         
         // Allow formatter to initialize the log file with header content
         success = success && [self.logFormatter beginLogWithFileHandle:fileHandle error:error];
