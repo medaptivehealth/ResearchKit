@@ -461,6 +461,21 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) NSString *lastStepIdAnswered;
 
 /**
+ The Cancel action.
+  
+  This action is triggered when the user try to cancel the task.
+ */
+- (IBAction)cancelAction:(UIBarButtonItem *)sender;
+
+/**
+ This is the delegate called when the task has finished.
+ 
+ @param reason              An `ORKTaskViewControllerFinishReason` value indicating how the user chose to complete the task.
+ @param error               If failure occurred, an `NSError` object indicating the reason for the failure. The value of this parameter is `nil` if `result` does not indicate failure.
+ */
+- (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error;
+
+/**
  Forces navigation to the next step.
  
  Call this method to force forward navigation. This method is called by the framework
